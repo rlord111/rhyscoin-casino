@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Profile - Rhys Coin Casino</title>
+<link rel="stylesheet" href="styles.css" />
+<script defer src="coinbase.js"></script>
+<script defer src="wallet.js"></script>
+</head>
+<body>
+<header>
+  <h1>Your Profile</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="coinflip.html">Coin Flip</a>
+    <a href="blackjack.html">Blackjack</a>
+    <a href="roulette.html">Roulette</a>
+    <a href="poker.html">Poker</a>
+    <a href="cases.html">Cases</a>
+    <a href="profile.html">Profile</a>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h2>Player Info</h2>
+    <p>Wallet address: <span id="walletAddress">Not connected</span></p>
+    <p>Rhys Coin balance: <span id="rhcBalance">0.00</span></p>
+    <button id="connectWallet">Connect Wallet</button>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Rhys Coin Casino</p>
+</footer>
+
+<script>
+document.getElementById('connectWallet').addEventListener('click', async () => {
+  if(window.ethereum) {
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+      document.getElementById('walletAddress').textContent = account;
+      // TODO: fetch and display RHC balance here
+    } catch(e) {
+      alert('Wallet connection failed.');
+    }
+  } else {
+    alert('MetaMask or compatible wallet not detected.');
+  }
+});
+</script>
+</body>
+</html>
